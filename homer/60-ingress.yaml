@@ -11,6 +11,9 @@ spec:
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: homer
-          servicePort: 80
+          service:
+            name: homer
+            port:
+              number: 80
