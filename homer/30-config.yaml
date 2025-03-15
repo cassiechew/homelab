@@ -12,7 +12,6 @@ data:
     columns: "2"
     connectivityCheck: true
     theme: default
-
     colors:
       light:
         highlight-primary: "#3367d6"
@@ -40,12 +39,10 @@ data:
         card-shadow: rgba(0, 0, 0, 0.4)
         link-hover: "#ffdd57"
         background-image: "assets/your/dark/bg.png"
-
     links:
       - name: "Kubernetes Config"
         icon: "fab fa-github"
         url: "https://github.com/hugomd/kubernetes-homelab"
-
     services:
       - name: "Networking"
         icon: "fas fa-server"
