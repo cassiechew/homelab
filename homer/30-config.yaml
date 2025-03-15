@@ -51,11 +51,11 @@ data:
             url: "https://my.nextdns.io"
             icon: "fas fa-book"
           - name: "whoami"
-            url: "https://who.sost.ovh"
+            url: "https://who.czcx.cc"
             icon: "fas fa-user"
       - name: "Monitoring"
         icon: "fas fa-heartbeat"
         items:
           - name: "Grafana"
-            url: "https://grafana.sost.ovh"
+            url: "https://grafana.czcx.cc"
             icon: "fa fa-exclamation-circle"
