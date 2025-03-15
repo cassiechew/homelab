@@ -4,39 +4,15 @@ metadata:
   name: homer-config
   namespace: homer
 data:
-  config.yml: 
+  config.yml: |
     ---
-    # Homepage configuration
-    # See https://fontawesome.com/icons for icons options
-
-    # Optional: Use external configuration file. 
-    # Using this will ignore remaining config in this file
-    # externalConfig: https://example.com/server-luci/config.yaml
-
     title: "Homelab Dashboard"
-    # subtitle: "Homer"
-    # documentTitle: "Welcome" # Customize the browser tab text
-    # logo: "assets/logo.png"
-    # Alternatively a fa icon can be provided:
-    # icon: "fas fa-skull-crossbones"
+    header: true
+    footer: false
+    columns: "2"
+    connectivityCheck: true
+    theme: default
 
-    header: true # Set to false to hide the header
-    footer: false # set false if you want to hide it.
-
-    columns: "2" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
-    connectivityCheck: true # whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example)
-
-    # Optional theming
-    theme: default # 'default' or one of the themes available in 'src/assets/themes'.
-
-    # Optional custom stylesheet
-    # Will load custom CSS files. Especially useful for custom icon sets.
-    # stylesheet:
-    #   - "assets/custom.css"
-
-    # Here is the exhaustive list of customization parameters
-    # However all value are optional and will fallback to default if not set.
-    # if you want to change only some of the colors, feel free to remove all unused key.
     colors:
       light:
         highlight-primary: "#3367d6"
@@ -65,32 +41,12 @@ data:
         link-hover: "#ffdd57"
         background-image: "assets/your/dark/bg.png"
 
-    # Optional message
-    message:
-      # url: "https://<my-api-endpoint>" # Can fetch information from an endpoint to override value below.
-      # mapping: # allows to map fields from the remote format to the one expected by Homer
-      #   title: 'id' # use value from field 'id' as title
-      #   content: 'value' # value from field 'value' as content
-      # refreshInterval: 10000 # Optional: time interval to refresh message
-      #
-      # Real example using chucknorris.io for showing Chuck Norris facts as messages:
-      # url: https://api.chucknorris.io/jokes/random
-      # mapping:
-      #   title: 'id'
-      #   content: 'value'
-      # refreshInterval: 10000
-
-    # Optional navbar
-    # links: [] # Allows for navbar (dark mode, layout, and search) without any links
     links:
       - name: "Kubernetes Config"
         icon: "fab fa-github"
         url: "https://github.com/hugomd/kubernetes-homelab"
 
-    # Services
-    # First level array represents a group.
-    # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
-    services: |
+    services:
       - name: "Networking"
         icon: "fas fa-server"
         items:
