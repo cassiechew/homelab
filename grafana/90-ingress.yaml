@@ -5,20 +5,40 @@ metadata:
   namespace: grafana
   annotations:
     kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: grafana.czcx.cc
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: grafana
+              port:
+                number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-internal
+  namespace: grafana
+  annotations:
+    kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   rules:
-    - host: grafana.czcx.cc
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: grafana
-                port:
-                  number: 80
+  - host: grafana.internal.czcx.cc
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: grafana
+              port:
+                number: 80
   tls:
-    - secretName: grafana-tls
+    - secretName: grafana-internal-tls-prod-cert
       hosts:
-        - grafana.czcx.cc
+        - grafana.internal.czcx.cc
