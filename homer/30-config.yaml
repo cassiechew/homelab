@@ -5,7 +5,6 @@ metadata:
   namespace: homer
 data:
   config.yml: 
-    ---
     # Homepage configuration
     # See https://fontawesome.com/icons for icons options
 
@@ -101,21 +100,21 @@ data:
       #       # Alternatively a fa icon can be provided:
       #       icon: "fas fa-play-circle"
       #       tag: "media"
-      #       url: "https://plex.sost.ovh"
+      #       url: "https://plex.czcx.cc"
       #     - name: "Flood"
       #       # logo: "assets/tools/sample.png"
       #       # Alternatively a fa icon can be provided:
       #       icon: "fas fa-download"
       #       tag: "media"
-      #       url: "https://rflood.sost.ovh"
+      #       url: "https://rflood.czcx.cc"
       # - name: "Utility"
       #   icon: "fas fa-heartbeat"
       #   items:
       #     - name: "Authelia"
-      #       url: "https://authelia.sost.ovh"
+      #       url: "https://authelia.czcx.cc"
       #       icon: "fas fa-lock"
       #     - name: "Home Assistant"
-      #       url: "https://hass.sost.ovh"
+      #       url: "https://hass.czcx.cc"
       #       icon: "fas fa-home"
       - name: "Networking"
         icon: "fas fa-server"
@@ -127,11 +126,11 @@ data:
             url: "https://my.nextdns.io"
             icon: "fas fa-book"
           - name: "whoami"
-            url: "https://who.sost.ovh"
+            url: "https://who.czcx.cc"
             icon: "fas fa-user"
       # - name: "Monitoring"
       #   icon: "fas fa-heartbeat"
       #   items:
       #     - name: "Grafana"
-      #       url: "https://grafana.sost.ovh"
+      #       url: "https://grafana.czcx.cc"
       #       icon: "fa fa-exclamation-circle"
