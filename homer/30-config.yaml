@@ -5,6 +5,14 @@ metadata:
   namespace: homer
 data:
   config.yml: 
+    ---
+    # Homepage configuration
+    # See https://fontawesome.com/icons for icons options
+
+    # Optional: Use external configuration file. 
+    # Using this will ignore remaining config in this file
+    # externalConfig: https://example.com/server-luci/config.yaml
+
     title: "Homelab Dashboard"
     # subtitle: "Homer"
     # documentTitle: "Welcome" # Customize the browser tab text
@@ -90,5 +98,11 @@ data:
             url: "https://my.nextdns.io"
             icon: "fas fa-book"
           - name: "whoami"
-            url: "https://who.czcx.cc"
+            url: "https://who.sost.ovh"
             icon: "fas fa-user"
+      - name: "Monitoring"
+        icon: "fas fa-heartbeat"
+        items:
+          - name: "Grafana"
+            url: "https://grafana.sost.ovh"
+            icon: "fa fa-exclamation-circle"
