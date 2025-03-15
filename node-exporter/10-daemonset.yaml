@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: node-exporter
+  namespace: monitoring
+  labels:
+    app: node-exporter
+spec:
+  selector:
+    matchLabels:
+      app: node-exporter
+  template:
+    metadata:
+      labels:
+        app: node-exporter
+    spec:
+      containers:
+        - name: node-exporter
+          image: quay.io/prometheus/node-exporter:v1.3.1
+          ports:
+            - containerPort: 9100
+              name: http
+          resources:
+            limits:
+              memory: 100Mi
+              cpu: 100m
+            requests:
+              memory: 50Mi
+              cpu: 50m
+          volumeMounts:
+            - mountPath: /etc/procfs
+              name: procfs
+            - mountPath: /sys
+              name: sysfs
+            - mountPath: /var/lib/docker
+              name: dockershim
+      volumes:
+        - name: procfs
+          hostPath:
+            path: /proc
+        - name: sysfs
+          hostPath:
+            path: /sys
+        - name: dockershim
+          hostPath:
+            path: /var/lib/docker
