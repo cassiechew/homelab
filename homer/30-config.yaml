@@ -5,13 +5,6 @@ metadata:
   namespace: homer
 data:
   config.yml: 
-    # Homepage configuration
-    # See https://fontawesome.com/icons for icons options
-
-    # Optional: Use external configuration file. 
-    # Using this will ignore remaining config in this file
-    # externalConfig: https://example.com/server-luci/config.yaml
-
     title: "Homelab Dashboard"
     # subtitle: "Homer"
     # documentTitle: "Welcome" # Customize the browser tab text
@@ -90,47 +83,12 @@ data:
     # First level array represents a group.
     # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
     services: |
-      # - name: "Media"
-      #   icon: "fas fa-play-circle"
-      #   # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
-      #   # logo: "path/to/logo"
-      #   items:
-      #     - name: "Plex"
-      #       # logo: "assets/tools/sample.png"
-      #       # Alternatively a fa icon can be provided:
-      #       icon: "fas fa-play-circle"
-      #       tag: "media"
-      #       url: "https://plex.czcx.cc"
-      #     - name: "Flood"
-      #       # logo: "assets/tools/sample.png"
-      #       # Alternatively a fa icon can be provided:
-      #       icon: "fas fa-download"
-      #       tag: "media"
-      #       url: "https://rflood.czcx.cc"
-      # - name: "Utility"
-      #   icon: "fas fa-heartbeat"
-      #   items:
-      #     - name: "Authelia"
-      #       url: "https://authelia.czcx.cc"
-      #       icon: "fas fa-lock"
-      #     - name: "Home Assistant"
-      #       url: "https://hass.czcx.cc"
-      #       icon: "fas fa-home"
       - name: "Networking"
         icon: "fas fa-server"
         items:
-          # - name: "Ubiquiti"
-          #   url: "https://unifi.ui.com"
-          #   icon: "fas fa-server"
           - name: "NextDNS"
             url: "https://my.nextdns.io"
             icon: "fas fa-book"
           - name: "whoami"
             url: "https://who.czcx.cc"
             icon: "fas fa-user"
-      # - name: "Monitoring"
-      #   icon: "fas fa-heartbeat"
-      #   items:
-      #     - name: "Grafana"
-      #       url: "https://grafana.czcx.cc"
-      #       icon: "fa fa-exclamation-circle"
