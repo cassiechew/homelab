@@ -19,6 +19,10 @@ data:
         kubernetes_sd_configs:
           - role: endpoints
       - job_name: 'kube-state-metrics'
+        static_configs:
+          - targets:
+            - 'kube-state-metrics.kube-system.svc.cluster.local:8080'  # Adjust with correct address
+
         kubernetes_sd_configs:
           - role: pod
             namespaces:
@@ -27,5 +31,13 @@ data:
         metrics_path: /metrics
         scheme: http
         relabel_configs:
+          - source_labels: [__meta_kubernetes_service_name]
+            target_label: service
+          - source_labels: [__meta_kubernetes_namespace]
+            target_label: namespace
+          - source_labels: [__meta_kubernetes_pod_name]
+            target_label: pod
+          - source_labels: [__meta_kubernetes_pod_container_name]
+            target_label: container
           - source_labels: [__meta_kubernetes_pod_label_k8s_app]
             target_label: app
