@@ -18,3 +18,14 @@ data:
       - job_name: "kubernetes-service-endpoints"
         kubernetes_sd_configs:
           - role: endpoints
+      - job_name: 'kube-state-metrics'
+        kubernetes_sd_configs:
+          - role: pod
+            namespaces:
+              names:
+                - kube-system
+        metrics_path: /metrics
+        scheme: http
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_pod_label_k8s_app]
+            target_label: app
