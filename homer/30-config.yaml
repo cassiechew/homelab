@@ -44,6 +44,17 @@ data:
         icon: "fab fa-github"
         url: "https://github.com/hugomd/kubernetes-homelab"
     services:
+      - name: "Media"
+        icon: "fas fa-play-circle"
+        # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
+        # logo: "path/to/logo"
+        items:
+          - name: "Jellyfin"
+            # logo: "assets/tools/sample.png"
+            # Alternatively a fa icon can be provided:
+            icon: "fas fa-play-circle"
+            tag: "media"
+            url: "https://jellyfin.czcx.cc"
       - name: "Networking"
         icon: "fas fa-server"
         items:
