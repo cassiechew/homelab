@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jellyfin
+  namespace: jellyfin
+spec:
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 8096   # Kubernetes internal port
+      targetPort: 8096  # NAS Jellyfin port
