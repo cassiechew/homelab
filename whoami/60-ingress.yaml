@@ -5,6 +5,7 @@ metadata:
   namespace: whoami
   annotations:
     kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   rules:
   - host: who.czcx.cc
@@ -17,28 +18,7 @@ spec:
             name: whoami
             port:
               number: 80
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: whoami-internal
-  namespace: whoami
-  annotations:
-    kubernetes.io/ingress.class: nginx-internal
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-spec:
-  rules:
-  - host: who.internal.czcx.cc
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: whoami
-            port:
-              number: 80
   tls:
-    - secretName: who-internal-tls-prod-cert
+    - secretName: who-tls-prod-cert
       hosts:
-        - who.internal.czcx.cc
+        - who.czcx.cc

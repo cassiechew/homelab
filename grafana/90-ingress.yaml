@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: grafana
+  name: grafana-internal
   namespace: grafana
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   rules:
   - host: grafana.czcx.cc
@@ -18,29 +18,7 @@ spec:
               name: grafana
               port:
                 number: 80
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: grafana-internal
-  namespace: grafana
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-spec:
-  rules:
-  - host: grafana.internal.czcx.cc
-    http:
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: grafana
-              port:
-                number: 80
   tls:
-    - secretName: grafana-internal-tls-prod-cert
+    - secretName: grafana-tls-prod-cert
       hosts:
-        - grafana.internal.czcx.cc
+        - grafana.czcx.cc
