@@ -12,3 +12,11 @@ spec:
       - http01:
           ingress:
             class: nginx
+          solvers:
+      - dns01:
+          cloudflare:
+            email: "me@cassie.id"
+            apiTokenSecretRef:
+              name: cloudflare-api-token-secret
+              key: api-token
+
