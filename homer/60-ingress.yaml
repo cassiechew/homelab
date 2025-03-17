@@ -5,6 +5,7 @@ metadata:
   namespace: homer
   annotations:
     kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
   rules:
   - host: homer.czcx.cc
