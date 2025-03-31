@@ -17,3 +17,7 @@ spec:
                 name: jellyfin
                 port:
                   number: 8096
+  tls:
+    - secretName: jellyfin-tls-cert
+      hosts:
+        - jellyfin.czcx.cc
