@@ -7,5 +7,5 @@ spec:
   type: ClusterIP
   ports:
     - protocol: TCP
-      port: 80   # Kubernetes internal port
-      targetPort: 5001  # NAS Jellyfin port
+      port: 5001   # Kubernetes internal port
+      targetPort: 5001  # NAS port
