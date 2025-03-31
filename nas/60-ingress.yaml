@@ -5,6 +5,8 @@ metadata:
   namespace: nas
   annotations:
     kubernetes.io/ingress.class: nginx
+    cert-manager.io/acme-challenge-type: http01
+    cert-manager.io/issuer: letsencrypt-staging
 spec:
   rules:
     - host: nas.czcx.cc
