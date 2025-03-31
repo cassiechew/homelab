@@ -1,12 +1,12 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: nas-tls-cert
+  name: nas-tls-prod-cert
   namespace: nas
 spec:
   secretName: nas-tls-secret
   issuerRef:
-    name: letsencrypt-prod
+    name: letsencrypt-staging
     kind: ClusterIssuer
   dnsNames:
     - nas.czcx.cc
