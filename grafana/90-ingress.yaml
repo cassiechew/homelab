@@ -8,7 +8,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-staging
 spec:
   rules:
-  - host: grafana.czcx.cc
+  - host: grafana.internal.czcx.cc
     http:
       paths:
         - path: /
@@ -19,6 +19,6 @@ spec:
               port:
                 number: 80
   tls:
-    - secretName: grafana-tls-prod-cert
+    - secretName: grafana-internal-tls-prod-cert
       hosts:
-        - grafana.czcx.cc
+        - grafana.internal.czcx.cc

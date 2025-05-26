@@ -1,25 +1,24 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: homer
-  namespace: homer
+  name: whoami
+  namespace: whoami
   annotations:
+    kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/whitelist-source-range: "4"
 spec:
-  ingressClassName: nginx
-  tls:
-  - hosts:
-    - homer.internal.czcx.cc
-    secretName: homer-internal-tls-secret
   rules:
-  - host: homer.internal.czcx.cc
+  - host: who.internal.czcx.cc
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: homer
+            name: whoami
             port:
               number: 80
+  tls:
+    - secretName: who-internal-tls-prod-cert
+      hosts:
+        - who.internal.czcx.cc

@@ -9,7 +9,7 @@ metadata:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"  # Redirect HTTP to HTTPS
 spec:
   rules:
-    - host: jellyfin.czcx.cc
+    - host: jellyfin.internal.czcx.cc
       http:
         paths:
           - path: /
@@ -20,6 +20,6 @@ spec:
                 port:
                   number: 8096
   tls:
-    - secretName: jellyfin-tls-prod-cert
+    - secretName: jellyfin-internal-tls-prod-cert
       hosts:
-        - jellyfin.czcx.cc
+        - jellyfin.internal.czcx.cc

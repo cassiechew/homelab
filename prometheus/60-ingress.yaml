@@ -8,7 +8,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-staging
 spec:
   rules:
-    - host: prometheus.czcx.cc
+    - host: prometheus.internal.czcx.cc
       http:
         paths:
           - path: /
@@ -19,6 +19,6 @@ spec:
                 port:
                   number: 80
   tls:
-    - secretName: prometheus-tls-prod-cert
+    - secretName: prometheus-internal-tls-prod-cert
       hosts:
-        - prometheus.czcx.cc
+        - prometheus.internal.czcx.cc

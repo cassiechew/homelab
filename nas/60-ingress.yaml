@@ -4,13 +4,13 @@ metadata:
   name: nas
   namespace: nas
   annotations:
-    kubernetes.io/ingress.class: nginx
+    spec.ingressClassName: nginx
     cert-manager.io/cluster-issuer: letsencrypt-staging
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"  # Redirect HTTP to HTTPS
 
 spec:
   rules:
-    - host: nas.czcx.cc
+    - host: nas.internal.czcx.cc
       http:
         paths:
           - path: /
@@ -21,6 +21,6 @@ spec:
                 port:
                   number: 5001
   tls:
-    - secretName: nas-tls-prod-cert
+    - secretName: nas-internal-tls-prod-cert
       hosts:
-        - nas.czcx.cc
+        - nas.internal.czcx.cc
