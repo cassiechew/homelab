@@ -5,7 +5,6 @@ metadata:
   namespace: homer
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/whitelist-source-range: "4"
 spec:
   ingressClassName: nginx
   tls:
