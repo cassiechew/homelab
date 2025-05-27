@@ -4,7 +4,7 @@ metadata:
   name: homer
   namespace: homer
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: homer
   ports:
