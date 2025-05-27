@@ -6,6 +6,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - protocol: TCP
+    - name: http-nas
+      protocol: TCP
       port: 5001   # Kubernetes internal port
       targetPort: 5001  # NAS port

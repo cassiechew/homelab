@@ -7,7 +7,8 @@ spec:
   selector:
     app: grafana
   ports:
-    - protocol: TCP
+    - name: http-grafana
+      protocol: TCP
       port: 80
       targetPort: 3000
   type: ClusterIP

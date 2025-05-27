@@ -7,7 +7,8 @@ spec:
   selector:
     app: prometheus
   ports:
-    - protocol: TCP
+    - name: http-prometheus
+      protocol: TCP
       port: 80
       targetPort: 9090
   type: ClusterIP

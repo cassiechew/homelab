@@ -9,6 +9,7 @@ spec:
     app: whoami
   type: ClusterIP
   ports:
-    - protocol: TCP
+    - name: http-prometheus
+      protocol: TCP
       port: 80
       targetPort: 80

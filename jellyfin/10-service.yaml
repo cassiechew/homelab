@@ -6,6 +6,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - protocol: TCP
+    - name: http-jellyfin
+      protocol: TCP
       port: 8096   # Kubernetes internal port
       targetPort: 8096  # NAS Jellyfin port
