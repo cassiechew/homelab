@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: nas-tls-secret
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
     - nas.czcx.cc

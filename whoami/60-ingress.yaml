@@ -4,9 +4,9 @@ metadata:
   name: whoami
   namespace: whoami
   annotations:
-    kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
+  ingressClassName: nginx
   rules:
   - host: who.czcx.cc
     http:
