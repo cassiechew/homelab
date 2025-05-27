@@ -4,7 +4,6 @@ metadata:
   name: whoami
   namespace: whoami
 spec:
-  externalTrafficPolicy: Local
   selector:
     app: whoami
   type: ClusterIP
