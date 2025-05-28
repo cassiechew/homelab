@@ -18,10 +18,9 @@ metadata:
   name: kiali
   namespace: ${NAMESPACE}
 spec:
-  auth:
-    strategy: anonymous
-  deployment:
-    accessible_namespaces: ["**"]
+  external_services:
+    prometheus:
+      url: "http://prometheus.prometheus.svc.cluster.local:9090"
 EOF
 
 # === Kiali Ingress YAML ===
@@ -49,7 +48,8 @@ EOF
 
 # === Kiali Operator Install ===
 echo "🧩 Installing Kiali Operator..."
-kubectl apply -f https://kiali.io/operator/latest/operator.yaml
+curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.32.0/install.sh | bash -s v0.32.0
+kubectl create -f https://operatorhub.io/install/kiali.yaml
 
 # === Wait for CRD ===
 echo "⏳ Waiting for Kiali CRD to be available..."
