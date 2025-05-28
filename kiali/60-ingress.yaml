@@ -8,13 +8,17 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: "kiali.internal.czcx.cc"
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: kiali
-            port:
-              number: 20001
+    - host: kiali.internal.czcx.cc
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: kiali
+              port:
+                number: 20001
+  tls:
+    - secretName: kiali-internal-tls-prod-cert
+      hosts:
+        - kiali.internal.czcx.cc

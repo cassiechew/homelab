@@ -6,6 +6,34 @@ metadata:
 spec:
   external_services:
     prometheus:
-      url: "http://prometheus.monitoring.svc.cluster.local:9090"
+      url: "http://prometheus.monitoring.svc.cluster.local:80"
+      tls:
+        insecure_skip_verify: true
     grafana:
-      url: "http://grafana.monitoring.svc.cluster.local:3000"
+      # enabled: true
+      internal_url: "http://grafana.monitoring.svc.cluster.local:80/" # Grafana service name is "grafana" and is in the "telemetry" namespace.
+      external_url: "http://grafana.czcx.cc" # Public facing URL of Grafana
+      tls:
+        insecure_skip_verify: true
+      dashboards:
+      - name: "Istio Service Dashboard"
+        variables:
+          namespace: "var-namespace"
+          service: "var-service"
+      - name: "Istio Workload Dashboard"
+        variables:
+          namespace: "var-namespace"
+          workload: "var-workload"
+      - name: "Istio Mesh Dashboard"
+      - name: "Istio Control Plane Dashboard"
+      - name: "Istio Performance Dashboard"
+      - name: "Istio Wasm Extension Dashboard"
+      auth:
+        ca_file: ""
+        insecure_skip_verify: false
+        password: "VKE5kyt4fwx9xmq.zmj"
+        token: ""
+        type: "basic"
+        use_kiali_token: false
+        username: "admin"
+        health_check_url: ""
