@@ -20,7 +20,9 @@ metadata:
 spec:
   external_services:
     prometheus:
-      url: "http://prometheus.prometheus.svc.cluster.local:9090"
+      url: "http://prometheus.monitoring.svc.cluster.local:9090"
+    grafana:
+      url: "http://grafana.monitoring.svc.cluster.local:3000"
 EOF
 
 # === Kiali Ingress YAML ===
