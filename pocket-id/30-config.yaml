@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pocket-id-env
+  namespace: pocket-id
+data:
+  PUBLIC_APP_URL: "http://localhost"
+  TRUST_PROXY: "false"
+  MAXMIND_LICENSE_KEY: ""
+  PUID: "1000"
+  PGID: "1000"
