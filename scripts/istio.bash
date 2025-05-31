@@ -36,6 +36,7 @@ istioctl install \
   --set values.cni.cniBinDir=/var/lib/rancher/k3s/data/current/bin \
   --set values.cni.cniConfDir=/var/lib/rancher/k3s/agent/etc/cni/net.d \
   --set values.cni.chained=true \
+  --set meshConfig.enableTracing=true
   --skip-confirmation
 
 echo "✅ Done. Istio Ambient mode installed."
