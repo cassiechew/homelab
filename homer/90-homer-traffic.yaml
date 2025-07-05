@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: homer-traffic
+  namespace: homer
+spec:
+  template:
+    spec:
+      containers:
+      - name: curl
+        image: curlimages/curl
+        command: ["sh", "-c", "for i in $(seq 1 100); do curl -s http://homer.homer.svc.cluster.local > /dev/null; sleep 0.5; done"]
+      restartPolicy: Never
+  backoffLimit: 0

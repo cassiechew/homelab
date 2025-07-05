@@ -1,0 +1,50 @@
+apiVersion: v1
+data:
+  mesh: |-
+    defaultConfig:
+      discoveryAddress: istiod.istio-system.svc:15012
+      image:
+        imageType: distroless
+      proxyMetadata:
+        ISTIO_META_ENABLE_HBONE: "true"
+      tracing:
+        sampling: 100.0
+    defaultProviders:
+      metrics:
+      - prometheus
+      tracing:
+      - opentelemetry
+    extensionProviders:
+      - name: opentelemetry
+        opentelemetry:
+          service: otel-collector.observability.svc.cluster.local
+          port: 4317
+    enablePrometheusMerge: true
+    enableTracing: true
+    rootNamespace: istio-system
+    trustDomain: cluster.local
+  meshNetworks: 'networks: {}'
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"mesh":"defaultConfig:\n  discoveryAddress: istiod.istio-system.svc:15012\n  image:\n    imageType: distroless\n  proxyMetadata:\n    ISTIO_META_ENABLE_HBONE: \"true\"\n  tracing:\n    sampling: 100.0\ndefaultProviders:\n  metrics:\n  - prometheus\n  tracing:\n  - opentelemetry\nextensionProviders:\n  - name: opentelemetry\n    opentelemetry:\n      service: otel-collector.observability.svc.cluster.local\n      port: 4317\nenablePrometheusMerge: true\nenableTracing: true\nrootNamespace: istio-system\ntrustDomain: cluster.local","meshNetworks":"networks: {}"},"kind":"ConfigMap","metadata":{"annotations":{},"creationTimestamp":"2025-05-31T10:08:45Z","labels":{"app.kubernetes.io/instance":"istio","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"istiod","app.kubernetes.io/part-of":"istio","app.kubernetes.io/version":"1.26.0","helm.sh/chart":"istiod-1.26.0","install.operator.istio.io/owning-resource":"unknown","install.operator.istio.io/owning-resource-namespace":"istio-system","istio.io/rev":"default","operator.istio.io/component":"Pilot","operator.istio.io/managed":"Reconcile","operator.istio.io/version":"1.26.0","release":"istio"},"name":"istio","namespace":"istio-system","resourceVersion":"10907414","uid":"cb002eec-1f0c-4681-bbb6-a7e77a4897e0"}}
+  creationTimestamp: "2025-05-31T10:08:45Z"
+  labels:
+    app.kubernetes.io/instance: istio
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: istiod
+    app.kubernetes.io/part-of: istio
+    app.kubernetes.io/version: 1.26.0
+    helm.sh/chart: istiod-1.26.0
+    install.operator.istio.io/owning-resource: unknown
+    install.operator.istio.io/owning-resource-namespace: istio-system
+    istio.io/rev: default
+    operator.istio.io/component: Pilot
+    operator.istio.io/managed: Reconcile
+    operator.istio.io/version: 1.26.0
+    release: istio
+  name: istio
+  namespace: istio-system
+  resourceVersion: "10957783"
+  uid: cb002eec-1f0c-4681-bbb6-a7e77a4897e0

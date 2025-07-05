@@ -11,12 +11,14 @@ data:
           grpc: {}
           http: {}
     exporters:
-      otlp/jaeger:
-        endpoint: jaeger-collector.observability.svc.cluster.local:4317
+      otlphttp:
+        endpoint: http://jaeger-collector.observability.svc.cluster.local:4318
         tls:
           insecure: true
+      logging:
+        loglevel: debug   
     service:
       pipelines:
         traces:
           receivers: [otlp]
-          exporters: [otlp/jaeger]
+          exporters: [otlphttp, logging]

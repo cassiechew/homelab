@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pocket-id-auth
+  namespace: pocket-id
+  annotations:
+    nginx.ingress.kubernetes.io/auth-url: "http://pocket-id.pocket-id.svc.cluster.local:1411/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "http://pocket-id.internal.czcx.cc/signin?rd=$escaped_request_uri"
+    nginx.ingress.kubernetes.io/auth-response-headers: "Authorization"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "*.internal.czcx"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: your-backend-service
+                port:
+                  number: 80

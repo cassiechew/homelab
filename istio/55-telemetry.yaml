@@ -6,7 +6,5 @@ metadata:
 spec:
   tracing:
   - providers:
-    - name: jaeger
-      opentelemetry:
-        service: jaeger-collector.observability.svc.cluster.local
-        port: 4317
+    - name: opentelemetry
+    randomSamplingPercentage: 100.0

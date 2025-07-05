@@ -9,7 +9,8 @@ spec:
     replicas: 1
     options:
       log-level: debug
-      collector.zipkin.host-port: ":9411"
+      collector.otlp.grpc.host-port: ":14250"
+      collector.otlp.http.host-port: ":4318"
   ingester:
     options:
       log-level: debug
