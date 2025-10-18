@@ -70,7 +70,6 @@ data:
           - name: "Grafana"
             url: "https://grafana.internal.czcx.cc"
             icon: "fa fa-exclamation-circle"
-            - name: "Monitoring"
       - name: "Prometheus"
         icon: "fas fa-heartbeat"
         items:
