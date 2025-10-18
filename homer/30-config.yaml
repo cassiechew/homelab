@@ -76,7 +76,6 @@ data:
           - name: "Prometheus"
             url: "https://prometheus.internal.czcx.cc"
             icon: "fa fa-exclamation-circle"
-            - name: "Monitoring"
       - name: "Kiali"
         icon: "fas fa-heartbeat"
         items:
