@@ -70,21 +70,12 @@ data:
           - name: "Grafana"
             url: "https://grafana.internal.czcx.cc"
             icon: "fa fa-exclamation-circle"
-      - name: "Prometheus"
-        icon: "fas fa-heartbeat"
-        items:
           - name: "Prometheus"
             url: "https://prometheus.internal.czcx.cc"
             icon: "fa fa-exclamation-circle"
-      - name: "Kiali"
-        icon: "fas fa-heartbeat"
-        items:
           - name: "Kiali"
             url: "https://kiali.internal.czcx.cc"
             icon: "fa fa-exclamation-circle"
-      - name: "Jaeger"
-        icon: "fas fa-heartbeat"
-        items:
           - name: "Jaeger"
             url: "https://Jaeger.internal.czcx.cc"
             icon: "fa fa-exclamation-circle"
