@@ -54,7 +54,7 @@ data:
             # Alternatively a fa icon can be provided:
             icon: "fas fa-play-circle"
             tag: "media"
-            url: "https://jellyfin.czcx.cc"
+            url: "https://jellyfin.internal.czcx.cc"
       - name: "Networking"
         icon: "fas fa-server"
         items:
@@ -68,5 +68,25 @@ data:
         icon: "fas fa-heartbeat"
         items:
           - name: "Grafana"
-            url: "https://grafana.czcx.cc"
+            url: "https://grafana.internal.czcx.cc"
+            icon: "fa fa-exclamation-circle"
+            - name: "Monitoring"
+      - name: "Prometheus"
+        icon: "fas fa-heartbeat"
+        items:
+          - name: "Prometheus"
+            url: "https://prometheus.internal.czcx.cc"
+            icon: "fa fa-exclamation-circle"
+            - name: "Monitoring"
+      - name: "Kiali"
+        icon: "fas fa-heartbeat"
+        items:
+          - name: "Kiali"
+            url: "https://kiali.internal.czcx.cc"
+            icon: "fa fa-exclamation-circle"
+      - name: "Jaeger"
+        icon: "fas fa-heartbeat"
+        items:
+          - name: "Jaeger"
+            url: "https://Jaeger.internal.czcx.cc"
             icon: "fa fa-exclamation-circle"
