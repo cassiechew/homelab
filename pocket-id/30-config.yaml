@@ -6,3 +6,5 @@ metadata:
 data:
   PUBLIC_APP_URL: "https://pocket.internal.czcx.cc"
   TRUST_PROXY: "true"
+  resolver-addresses: "kube-dns.kube-system.svc.cluster.local"
+  
