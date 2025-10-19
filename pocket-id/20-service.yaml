@@ -9,5 +9,5 @@ spec:
   ports:
     - protocol: TCP
       port: 1411
-      targetPort: 1411
+      targetPort: 80
       
