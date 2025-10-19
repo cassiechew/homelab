@@ -13,7 +13,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: "pocket.internal.czcx"
+    - host: "pocket.internal.czcx.cc"
       http:
         paths:
           - path: /
@@ -37,4 +37,3 @@ spec:
     - secretName: pocket-internal-tls-prod-cert
       hosts:
         - pocket.internal.czcx.cc
-        - "*.internal.czcx.cc"
