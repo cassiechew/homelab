@@ -7,6 +7,9 @@ metadata:
     nginx.ingress.kubernetes.io/auth-url: "http://pocket-id.pocket-id.svc.cluster.local:1411/auth"
     nginx.ingress.kubernetes.io/auth-signin: "http://pocket-id.internal.czcx.cc/signin?rd=$escaped_request_uri"
     nginx.ingress.kubernetes.io/auth-response-headers: "Authorization"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"  # Redirect HTTP to HTTPS
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS" 
 spec:
   ingressClassName: nginx
   rules:

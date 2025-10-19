@@ -5,7 +5,4 @@ metadata:
   namespace: pocket-id
 data:
   PUBLIC_APP_URL: "https://pocket.internal.czcx.cc"
-  TRUST_PROXY: "false"
-  MAXMIND_LICENSE_KEY: ""
-  PUID: "1000"
-  PGID: "1000"
+  TRUST_PROXY: "true"

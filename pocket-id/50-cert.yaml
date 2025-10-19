@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: pocket-id-internal-tls-prod-cert
+  namespace: pocket-id
+spec:
+  secretName: pocket-id-internal-tls-prod-cert
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - pocket.internal.czcx.cc
