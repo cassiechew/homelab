@@ -25,7 +25,7 @@ spec:
               service:
                 name: pocket-id
                 port:
-                  number: 80
+                  number: 1411
     - host: "*.internal.czcx.cc"
       http:
         paths:
@@ -35,7 +35,7 @@ spec:
               service:
                 name: pocket-id
                 port:
-                  number: 80
+                  number: 1411
   tls:
     - secretName: pocket-internal-tls-prod-cert
       hosts:
