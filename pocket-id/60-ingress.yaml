@@ -17,6 +17,10 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: your-backend-service
+                name: pocket-id
                 port:
                   number: 80
+  tls:
+    - secretName: pocket-internal-tls-prod-cert
+      hosts:
+        - pocket.internal.czcx.cc
