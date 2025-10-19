@@ -4,16 +4,26 @@ metadata:
   name: pocket-id-auth
   namespace: pocket-id
   annotations:
-    nginx.ingress.kubernetes.io/auth-url: "http://pocket-id.pocket-id.svc.cluster.local:1411/auth"
-    nginx.ingress.kubernetes.io/auth-signin: "http://pocket-id.internal.czcx.cc/signin?rd=$escaped_request_uri"
-    nginx.ingress.kubernetes.io/auth-response-headers: "Authorization"
+    nginx.ingress.kubernetes.io/auth-url: "https://pocket.internal.czcx.cc/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://pocket.internal.czcx.cc/signin?rd=$escaped_request_uri"
+    nginx.ingress.kubernetes.io/auth-response-headers: "Authorization, X-Auth-User, X-Auth-Email"
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"  # Redirect HTTP to HTTPS
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS" 
 spec:
   ingressClassName: nginx
   rules:
-    - host: "*.internal.czcx"
+    - host: "pocket.internal.czcx"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pocket-id
+                port:
+                  number: 80
+    - host: "*.internal.czcx.cc"
       http:
         paths:
           - path: /
@@ -27,3 +37,4 @@ spec:
     - secretName: pocket-internal-tls-prod-cert
       hosts:
         - pocket.internal.czcx.cc
+        - "*.internal.czcx.cc"
