@@ -1,10 +1,10 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: nas-tls-prod-cert
+  name: nas-internal-tls-prod-cert
   namespace: nas
 spec:
-  secretName: nas-tls-secret
+  secretName: nas-internal-tls-prod-cert
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer

@@ -1,10 +1,10 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: jellyfin-tls-prod-cert
+  name: jellyfin-internal-tls-prod-cert
   namespace: jellyfin
 spec:
-  secretName: jellyfin-tls-secret
+  secretName: jellyfin-internal-tls-prod-cert
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
