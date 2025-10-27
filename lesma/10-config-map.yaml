@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lesma-config
+  namespace: lesma
+  labels:
+    app: lesma
+data:
+  LESMA_ADDRESS: "0.0.0.0"
+  LESMA_PORT: "8000"
+  LESMA_HTTPS: "false" # handled by ingress TLS in front
+  LESMA_LOG_LEVEL: "normal"
+  LESMA_TEXT_SIZE_LIMIT: "1MiB" # default text paste limit
+  LESMA_BINARY_SIZE_LIMIT: "10MiB" # default binary upload limit
+  LESMA_DEFAULT_LIMIT_PLAIN: "0" # unlimited
+  LESMA_DEFAULT_LIMIT_BROWSER: "0" # unlimited
+  LESMA_DEFAULT_EXPIRE_PLAIN: "720" # hours
+  LESMA_DEFAULT_EXPIRE_BROWSER: "24" # hours
+  LESMA_MAX_EXPIRE: "720"
+  LESMA_STORAGE: "/var/lib/lesma" # data dir mounted via PVC

@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lesma
+  namespace: lesma
+  labels:
+    app: lesma
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lesma
+  template:
+    metadata:
+      labels:
+        app: lesma
+    spec:
+      securityContext:
+        runAsUser: 100
+        runAsGroup: 100
+        fsGroup: 100
+      containers:
+        - name: app
+          # Choose an available image:
+          # - Build from source and push to your registry
+          # - Or use registry.gitlab.com/ogarcia/lesma:<tag> if published
+          image: registry.gitlab.com/ogarcia/lesma:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+              name: http
+          envFrom:
+            - configMapRef:
+                name: lesma-config
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/lesma
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 6
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 20
+            timeoutSeconds: 3
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "128Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: lesma-data
