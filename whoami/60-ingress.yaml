@@ -32,3 +32,6 @@ spec:
     - secretName: who-tls-prod-cert
       hosts:
         - who.czcx.cc
+    - secretName: who-internal-tls-prod-cert
+      hosts:
+        - who.internal.czcx.cc

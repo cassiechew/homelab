@@ -1,0 +1,33 @@
+# Run Laravel's scheduler every minute (uses same image script cron.sh)
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: monica-scheduler
+  namespace: monica
+spec:
+  schedule: "* * * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: scheduler
+              image: monica:latest
+              command: ["cron.sh"]
+              env:
+                - {name: DB_CONNECTION, value: "mysql"}
+                - {name: DB_HOST, value: "mariadb"}
+                - {name: DB_PORT, value: "3306"}
+              envFrom:
+                - secretRef: {name: monica-app}
+                - secretRef: {name: monica-db}
+              volumeMounts:
+                - name: storage
+                  mountPath: /var/www/html/storage
+          volumes:
+            - name: storage
+              persistentVolumeClaim:
+                claimName: monica-storage
