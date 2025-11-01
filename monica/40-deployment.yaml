@@ -30,13 +30,20 @@ spec:
             - name: storage
               mountPath: /var/www/html/storage
           readinessProbe:
-            httpGet: {path: /, port: http}
-            initialDelaySeconds: 15
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 10
             periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 6
           livenessProbe:
-            httpGet: {path: /, port: http}
+            tcpSocket:
+              port: 80
             initialDelaySeconds: 60
             periodSeconds: 10
+            failureThreshold: 3
       volumes:
         - name: storage
           persistentVolumeClaim:
