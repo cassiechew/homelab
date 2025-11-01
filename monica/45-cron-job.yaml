@@ -6,16 +6,20 @@ metadata:
   namespace: monica
 spec:
   schedule: "* * * * *"
+  concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 3
+  suspend: false
   jobTemplate:
     spec:
       template:
         spec:
+          ttlSecondsAfterFinished: 300
+          backoffLimit: 0
           restartPolicy: Never
           containers:
             - name: scheduler
-              image: monica:latest
+              image: monicahq/monica:latest
               command: ["cron.sh"]
               env:
                 - {name: DB_CONNECTION, value: "mysql"}
