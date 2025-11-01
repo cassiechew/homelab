@@ -19,7 +19,7 @@ spec:
               command: ["cron.sh"]
               env:
                 - {name: DB_CONNECTION, value: "mysql"}
-                - {name: DB_HOST, value: "mariadb"}
+                - {name: DB_HOST, value: "mariadb-svc"}
                 - {name: DB_PORT, value: "3306"}
               envFrom:
                 - secretRef: {name: monica-app}
