@@ -12,10 +12,10 @@ spec:
   suspend: false
   jobTemplate:
     spec:
+      ttlSecondsAfterFinished: 300
+      backoffLimit: 0
       template:
         spec:
-          ttlSecondsAfterFinished: 300
-          backoffLimit: 0
           restartPolicy: Never
           containers:
             - name: scheduler
