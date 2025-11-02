@@ -14,7 +14,7 @@ spec:
       containers:
         # Simpler "apache" image exposes HTTP on :80 (no separate web server).
         - name: app
-          image: monicahq/monica:latest
+          image: monica:latest
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
