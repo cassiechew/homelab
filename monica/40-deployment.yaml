@@ -35,7 +35,7 @@ spec:
               mountPath: /var/www/html/storage
           readinessProbe:
             httpGet:
-              path: /
+              path: /register
               port: 80
               scheme: HTTP
             initialDelaySeconds: 10
