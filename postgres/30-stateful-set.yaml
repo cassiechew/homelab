@@ -32,24 +32,6 @@ spec:
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
             # Used by init-user-db.sh (optional)
-            - name: APP_DB
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-superuser
-                  key: APP_DB
-                  optional: true
-            - name: APP_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-superuser
-                  key: APP_USER
-                  optional: true
-            - name: APP_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-superuser
-                  key: APP_PASSWORD
-                  optional: true
           volumeMounts:
             - name: data
               mountPath: /var/lib/postgresql/data
