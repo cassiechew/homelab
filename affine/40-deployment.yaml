@@ -22,8 +22,6 @@ spec:
           env:
             - name: NODE_ENV
               value: production
-            - name: NODE_OPTIONS
-              value: "--import=./scripts/register.js"
             - name: AFFINE_ADMIN_EMAIL
               valueFrom:
                 secretKeyRef:
