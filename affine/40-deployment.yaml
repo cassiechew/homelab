@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: affine
+  namespace: affine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: affine
+  template:
+    metadata:
+      labels:
+        app: affine
+    spec:
+      containers:
+        - name: affine
+          image: ghcr.io/toeverything/affine-graphql:stable
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: NODE_OPTIONS
+              value: "--import=./scripts/register.js"
+            - name: AFFINE_ADMIN_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: affine-secrets
+                  key: AFFINE_ADMIN_EMAIL
+            - name: AFFINE_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: affine-secrets
+                  key: AFFINE_ADMIN_PASSWORD
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: affine-secrets
+                  key: DATABASE_URL
+            - name: REDIS_SERVER_HOST
+              value: "redis.default.svc.cluster.local"
+            - name: AFFINE_BASE_URL
+              value: "https://affine.yourdomain.com"
+          ports:
+            - containerPort: 3010
+          volumeMounts:
+            - name: affine-data
+              mountPath: /root/.affine
+      volumes:
+        - name: affine-data
+          persistentVolumeClaim:
+            claimName: affine-data
