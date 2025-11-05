@@ -39,8 +39,13 @@ spec:
                   key: DATABASE_URL
             - name: REDIS_SERVER_HOST
               value: "redis.redis.svc.cluster.local"
+            - name: REDIS_SERVER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: affine-secrets
+                  key: REDIS_SERVER_PASSWORD
             - name: AFFINE_BASE_URL
-              value: "https://affine.yourdomain.com"
+              value: "https://affine.czcx.cc"
           ports:
             - containerPort: 3010
           volumeMounts:
