@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: postgres
+data:
+  postgresql.conf: |
+    shared_buffers = 256MB
+    effective_cache_size = 768MB
+    work_mem = 8MB
+    maintenance_work_mem = 128MB
+    wal_level = replica
+    max_wal_senders = 2
+    max_connections = 100
+    # Enable pg_stat_statements (requires shared_preload_libraries)
+    shared_preload_libraries = 'pg_stat_statements'
+    track_io_timing = on
+  # Optional entrypoint script to create an app user/db on first boot
+  init-user-db.sh: |
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if [[ -n "${APP_DB:-}" && -n "${APP_USER:-}" && -n "${APP_PASSWORD:-}" ]]; then
+      psql -v ON_ERROR_STOP=1 --username "postgres" <<-EOSQL
+        CREATE USER "${APP_USER}" WITH ENCRYPTED PASSWORD '${APP_PASSWORD}';
+        CREATE DATABASE "${APP_DB}" OWNER "${APP_USER}";
+        GRANT ALL PRIVILEGES ON DATABASE "${APP_DB}" TO "${APP_USER}";
+      EOSQL
+    fi
