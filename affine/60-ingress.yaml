@@ -12,7 +12,7 @@ spec:
         - affine.internal.czcx.cc
       secretName: affine-internal-tls-secret
   rules:
-    - host: affine.czcx.cc
+    - host: affine.internal.czcx.cc
       http:
         paths:
           - path: /
