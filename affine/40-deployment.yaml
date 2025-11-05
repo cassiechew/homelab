@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: affine
   namespace: affine
+
 spec:
   replicas: 1
   selector:
@@ -12,6 +13,7 @@ spec:
     metadata:
       labels:
         app: affine
+        needs-postgres: true
     spec:
       containers:
         - name: affine
@@ -38,7 +40,20 @@ spec:
                   name: affine-secrets
                   key: DATABASE_URL
             - name: REDIS_SERVER_HOST
-              value: "redis.redis.svc.cluster.local"
+              valueFrom:
+                secretKeyRef:
+                  name: affine-secrets
+                  key: REDIS_SERVER_HOST
+            - name: REDIS_SERVER_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: affine-secrets
+                  key: REDIS_SERVER_PORT
+            - name: REDIS_SERVER_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: affine-secrets
+                  key: REDIS_SERVER_USERNAME
             - name: REDIS_SERVER_PASSWORD
               valueFrom:
                 secretKeyRef:
