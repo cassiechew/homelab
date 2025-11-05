@@ -38,7 +38,7 @@ spec:
                   name: affine-secrets
                   key: DATABASE_URL
             - name: REDIS_SERVER_HOST
-              value: "redis.default.svc.cluster.local"
+              value: "redis.redis.svc.cluster.local"
             - name: AFFINE_BASE_URL
               value: "https://affine.yourdomain.com"
           ports:
