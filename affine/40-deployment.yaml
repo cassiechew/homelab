@@ -45,7 +45,7 @@ spec:
                   name: affine-secrets
                   key: REDIS_SERVER_PASSWORD
             - name: AFFINE_BASE_URL
-              value: "https://affine.czcx.cc"
+              value: "https://affine.internal.czcx.cc"
           ports:
             - containerPort: 3010
           volumeMounts:

@@ -9,7 +9,7 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - affine.czcx.cc
+        - affine.internal.czcx.cc
       secretName: affine-internal-tls-secret
   rules:
     - host: affine.czcx.cc
