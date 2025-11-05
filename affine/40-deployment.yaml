@@ -17,7 +17,7 @@ spec:
     spec:
       initContainers:
         - name: migrate
-          image: ghcr.io/toeverything/affine-graphql:stable
+          image: ghcr.io/toeverything/affine:stable
           env:
             - name: DATABASE_URL
               valueFrom:
@@ -32,7 +32,7 @@ spec:
               || npx prisma db push
       containers:
         - name: affine
-          image: ghcr.io/toeverything/affine-graphql:stable
+          image: ghcr.io/toeverything/affine:stable
           imagePullPolicy: IfNotPresent
           env:
             - name: NODE_ENV
