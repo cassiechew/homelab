@@ -28,8 +28,7 @@ spec:
           args:
             # Try proper migrations first; fall back to pushing the schema if needed.
             - >
-              npx prisma migrate deploy
-              || npx prisma db push
+              sh -c node ./scripts/self-host-predeploy.js
       containers:
         - name: affine
           image: ghcr.io/toeverything/affine:stable
