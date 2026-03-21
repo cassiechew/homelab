@@ -1,0 +1,26 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-internal-tls
+  namespace: istio-system
+spec:
+  secretName: wildcard-internal-tls
+  dnsNames:
+    - "*.internal.czcx.cc"
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-external-tls
+  namespace: istio-system
+spec:
+  secretName: wildcard-external-tls
+  dnsNames:
+    - "*.czcx.cc"
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+

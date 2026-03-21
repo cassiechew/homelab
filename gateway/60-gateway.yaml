@@ -1,0 +1,40 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: internal-gateway
+  namespace: istio-system
+spec:
+  gatewayClassName: istio
+  listeners:
+    - name: http
+      port: 80
+      protocol: HTTP
+      hostname: "*.internal.czcx.cc"
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: https
+      port: 443
+      protocol: HTTPS
+      hostname: "*.internal.czcx.cc"
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: wildcard-internal-tls
+            namespace: istio-system
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: https-external
+      port: 443
+      protocol: HTTPS
+      hostname: "*.czcx.cc"
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: wildcard-external-tls
+            namespace: istio-system
+      allowedRoutes:
+        namespaces:
+          from: All
+
