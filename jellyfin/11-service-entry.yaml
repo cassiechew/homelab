@@ -7,12 +7,12 @@ spec:
   hosts:
     - jellyfin.jellyfin.svc.cluster.local
   addresses:
-    - 192.168.68.67
+    - 100.90.119.128
   ports:
     - number: 8096
-      name: https
-      protocol: HTTPS
+      name: http
+      protocol: HTTP
   location: MESH_EXTERNAL
   resolution: STATIC
   endpoints:
-    - address: 192.168.68.67
+    - address: 100.90.119.128

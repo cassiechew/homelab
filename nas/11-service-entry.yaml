@@ -7,7 +7,7 @@ spec:
   hosts:
     - nas.nas.svc.cluster.local
   addresses:
-    - 192.168.68.67
+    - 100.90.119.128
   ports:
     - number: 5001
       name: https
@@ -15,4 +15,4 @@ spec:
   location: MESH_EXTERNAL
   resolution: STATIC
   endpoints:
-    - address: 192.168.68.67
+    - address: 100.90.119.128

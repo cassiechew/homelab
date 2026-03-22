@@ -40,3 +40,15 @@ istioctl install \
   --skip-confirmation
 
 echo "✅ Done. Istio Ambient mode installed."
+
+echo "🌐 Reapplying gateway resources..."
+kubectl apply -f /home/cassiechew3/config/homelab/gateway/certificates.yaml --kubeconfig "$KUBECONFIG"
+kubectl apply -f /home/cassiechew3/config/homelab/gateway/gateway.yaml --kubeconfig "$KUBECONFIG"
+echo "✅ Gateway resources applied."
+
+echo "🏷️ Re-labelling namespaces for ambient mode..."
+for ns in whoami lesma observability monitoring monica homer nas jellyfin pocket-id affine; do
+  kubectl label namespace $ns istio.io/dataplane-mode=ambient --overwrite --kubeconfig "$KUBECONFIG"
+done
+echo "✅ Namespaces labelled."
+

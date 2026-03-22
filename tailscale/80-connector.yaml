@@ -1,0 +1,10 @@
+apiVersion: tailscale.com/v1alpha1
+kind: Connector
+metadata:
+  name: tailscale-connector
+  namespace: tailscale
+spec:
+  hostname: k8s-connector
+  subnetRouter:
+    advertiseRoutes:
+      - "100.90.119.128/32"
