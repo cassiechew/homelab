@@ -4,9 +4,9 @@ metadata:
   name: jellyfin
   namespace: jellyfin
 spec:
-  type: ClusterIP
+  selector:
+    app: jellyfin-proxy
   ports:
     - name: http-jellyfin
-      protocol: TCP
-      port: 8096   # Kubernetes internal port
-      targetPort: 8096  # NAS Jellyfin port
+      port: 8096
+      targetPort: 80

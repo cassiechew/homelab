@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: ServiceEntry
 metadata:
   name: nas-external
-  namespace: nas
+  namespace: istio-system
 spec:
   hosts:
     - nas.nas.svc.cluster.local

@@ -1,0 +1,11 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: nas-tls
+  namespace: nas
+spec:
+  host: ts-nas-4smll.tailscale.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
+      insecureSkipVerify: true

@@ -4,9 +4,9 @@ metadata:
   name: nas
   namespace: nas
 spec:
-  type: ClusterIP
+  selector:
+    app: nas-proxy
   ports:
     - name: http-nas
-      protocol: TCP
-      port: 5001   # Kubernetes internal port
-      targetPort: 5001  # NAS port
+      port: 5001
+      targetPort: 80
