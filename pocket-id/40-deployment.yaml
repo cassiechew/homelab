@@ -21,6 +21,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: pocket-id-env
+            - secretRef:
+                name: pocket-id-secret
           volumeMounts:
             - name: pocket-id-data
               mountPath: /app/data
