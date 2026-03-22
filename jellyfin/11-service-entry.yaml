@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: jellyfin-external
+  namespace: jellyfin
+spec:
+  hosts:
+    - jellyfin.jellyfin.svc.cluster.local
+  addresses:
+    - 192.168.68.67
+  ports:
+    - number: 8096
+      name: https
+      protocol: HTTPS
+  location: MESH_EXTERNAL
+  resolution: STATIC
+  endpoints:
+    - address: 192.168.68.67
