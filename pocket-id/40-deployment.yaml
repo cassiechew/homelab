@@ -36,4 +36,5 @@ spec:
             failureThreshold: 2
       volumes:
         - name: pocket-id-data
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: pocket-id-data

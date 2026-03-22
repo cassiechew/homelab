@@ -6,12 +6,40 @@ metadata:
 data:
   grafana.ini: |
     [server]
-    domain = grafana.czcx.cc
-    root_url = %(protocol)s://%(domain)s/
+    domain = grafana.internal.czcx.cc
+    root_url = https://grafana.internal.czcx.cc/
     serve_from_sub_path = true
     [security]
     admin_user = admin
     admin_password = admin
+    [auth.generic_oauth]
+    enabled = true
+    name = Pocket ID
+    auto_assign_org = true
+    auto_assign_org_role = Admin
+    client_id = cd8d5127-7002-4a84-91fb-669cd499cf3d
+    client_secret = ${GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET}
+    scopes = openid email profile
+    auth_url = https://pocket.internal.czcx.cc/authorize
+    token_url = http://pocket-id.pocket-id.svc.cluster.local:1411/api/oidc/token
+    api_url = http://pocket-id.pocket-id.svc.cluster.local:1411/api/oidc/userinfo
+    use_pkce = true
+    email_attribute_path = email
+    login_attribute_path = email
+    name_attribute_path = name
+    email_attribute_name = email
+    tls_skip_verify_insecure = true
+    [log]
+    level = debug
+    filters = oauth.generic_oauth:debug
+    [users]
+    allow_sign_up = true
+    auto_assign_org = true
+    auto_assign_org_id = 1
+    auto_assign_org_role = Admin
+    verify_email_enabled = false
+    [feature_toggles]
+    improvedExternalSessionHandling = false
   prometheus-datasource.yaml: |
     apiVersion: 1
     datasources:
