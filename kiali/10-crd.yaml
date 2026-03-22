@@ -4,17 +4,23 @@ metadata:
   name: kiali
   namespace: istio-system
 spec:
+  deployment:
+    pod_annotations: {}
+    resources:
+      limits:
+        memory: 512Mi
+      requests:
+        memory: 128Mi
   external_services:
     prometheus:
       url: "http://prometheus.monitoring.svc.cluster.local:80"
-      tls:
-        insecure_skip_verify: true
+    tracing:
+      internal_url: "http://jaeger-query.observability.svc.cluster.local:16686"
+      url: "http://jaeger.internal.czcx.cc"
     grafana:
       # enabled: true
       internal_url: "http://grafana.monitoring.svc.cluster.local:80/" # Grafana service name is "grafana" and is in the "telemetry" namespace.
       external_url: "http://grafana.czcx.cc" # Public facing URL of Grafana
-      tls:
-        insecure_skip_verify: true
       dashboards:
       - name: "Istio Service Dashboard"
         variables:
@@ -36,4 +42,4 @@ spec:
         type: "basic"
         use_kiali_token: false
         username: "admin"
-        health_check_url: ""
+      
