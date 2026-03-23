@@ -35,6 +35,6 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: prometheus
-          port: 80
+        - name: oauth2-proxy-prometheus
+          port: 4180
 
