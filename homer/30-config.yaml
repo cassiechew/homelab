@@ -63,6 +63,25 @@ data:
             icon: "fas fa-play-circle"
             tag: "media"
             url: "https://jellyfin.internal.czcx.cc/web/"
+      - name: "Identity"
+        icon: "fas fa-key"
+        items:
+          - name: "Pocket ID"
+            icon: "fas fa-fingerprint"
+            tag: "auth"
+            url: "https://pocket.internal.czcx.cc"
+
+      - name: "Productivity"
+        icon: "fas fa-pen-fancy"
+        items:
+          - name: "Affine"
+            icon: "fas fa-book-open"
+            tag: "notes"
+            url: "https://affine.internal.czcx.cc"
+          - name: "Monica"
+            icon: "fas fa-address-book"
+            tag: "crm"
+            url: "https://monica.internal.czcx.cc"
       - name: "Networking"
         icon: "fas fa-server"
         items:
@@ -89,15 +108,10 @@ data:
             icon: "fa fa-sailboat"
             tag: "istio"
           - name: "Jaeger"
-            url: "https://Jaeger.internal.czcx.cc"
+            url: "https://jaeger.internal.czcx.cc"
             icon: "fa fa-bullseye"
             tag: "metrics"
   custom.css: |
-    /* =========================================
-    Cassie's Sapphic Enchantress Theme
-    Homer Dashboard — Custom Stylesheet
-    ========================================= */
-
     :root {
       /* Core */
       --highlight-primary:   #FF0066;
