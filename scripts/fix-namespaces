@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+echo "🔮 Applying all namespace manifests..."
+
+find . -name "00-namespace.yaml" | sort | while read -r file; do
+  echo "✨ Applying $file"
+  kubectl apply -f "$file"
+done
+
+echo "👑 All namespaces applied!"
+

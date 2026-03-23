@@ -37,13 +37,16 @@ istioctl install \
   --set values.cni.cniConfDir=/var/lib/rancher/k3s/agent/etc/cni/net.d \
   --set values.cni.chained=true \
   --set meshConfig.enableTracing=true \
+  --set meshConfig.extensionProviders[0].name=opentelemetry \
+  --set meshConfig.extensionProviders[0].opentelemetry.service=otel-collector.observability.svc.cluster.local \
+  --set meshConfig.extensionProviders[0].opentelemetry.port=4317 \
   --skip-confirmation
 
 echo "✅ Done. Istio Ambient mode installed."
 
 echo "🌐 Reapplying gateway resources..."
-kubectl apply -f /home/cassiechew3/config/homelab/gateway/certificates.yaml --kubeconfig "$KUBECONFIG"
-kubectl apply -f /home/cassiechew3/config/homelab/gateway/gateway.yaml --kubeconfig "$KUBECONFIG"
+kubectl apply -f /home/cassiechew3/config/homelab/gateway/15-certificates.yaml --kubeconfig "$KUBECONFIG"
+kubectl apply -f /home/cassiechew3/config/homelab/gateway/60-gateway.yaml --kubeconfig "$KUBECONFIG"
 echo "✅ Gateway resources applied."
 
 echo "🏷️ Re-labelling namespaces for ambient mode..."
@@ -51,4 +54,10 @@ for ns in whoami lesma observability monitoring monica homer nas jellyfin pocket
   kubectl label namespace $ns istio.io/dataplane-mode=ambient --overwrite --kubeconfig "$KUBECONFIG"
 done
 echo "✅ Namespaces labelled."
+
+echo "🔮 Applying waypoints..."
+for ns in whoami homer monitoring observability monica affine pocket-id; do
+  istioctl waypoint apply -n $ns --enroll-namespace --kubeconfig "$KUBECONFIG" --overwrite
+done
+echo "✅ Waypoints applied."
 

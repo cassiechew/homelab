@@ -8,3 +8,18 @@ spec:
   - providers:
     - name: opentelemetry
     randomSamplingPercentage: 100.0
+---
+apiVersion: telemetry.istio.io/v1
+kind: Telemetry
+metadata:
+  name: telemetry-waypoints
+  namespace: istio-system
+spec:
+  targetRefs:
+  - kind: Gateway
+    name: waypoint
+    group: gateway.networking.k8s.io
+  tracing:
+  - providers:
+    - name: opentelemetry
+    randomSamplingPercentage: 100
