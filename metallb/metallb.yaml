@@ -4,6 +4,8 @@ metadata:
   name: homelab-pool
   namespace: metallb-system
 spec:
+  loadBalancerIP:
+    - 100.116.51.25
   addresses:
     - 192.168.68.69/32
     - 100.116.51.25/32
