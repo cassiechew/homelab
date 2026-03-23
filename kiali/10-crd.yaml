@@ -4,6 +4,28 @@ metadata:
   name: kiali
   namespace: istio-system
 spec:
+  auth:
+    strategy: openid
+    openid:
+      client_id: "21513e26-a978-41f6-9713-1f1968617460"
+      username_claim: "preferred_username"
+      disable_rbac: true
+      issuer_uri: "https://pocket.internal.czcx.cc"
+      insecure_skip_verify_tls: true
+      scopes:
+        - openid
+        - email
+        - profile
+      discovery_override:
+        authorization_endpoint: "https://pocket.internal.czcx.cc/authorize"
+        token_endpoint: "http://pocket-id.pocket-id.svc.cluster.local:1411/api/oidc/token"
+        userinfo_endpoint: "http://pocket-id.pocket-id.svc.cluster.local:1411/api/oidc/userinfo"
+        jwks_uri: "http://pocket-id.pocket-id.svc.cluster.local:1411/.well-known/jwks.json"
+  server:
+    web_fqdn: kiali.internal.czcx.cc
+    web_schema: https
+    web_port: "443"
+    web_root: /kiali
   deployment:
     pod_annotations: {}
     resources:
@@ -20,7 +42,7 @@ spec:
     grafana:
       # enabled: true
       internal_url: "http://grafana.monitoring.svc.cluster.local:80/" # Grafana service name is "grafana" and is in the "telemetry" namespace.
-      external_url: "http://grafana.czcx.cc" # Public facing URL of Grafana
+      external_url: "http://grafana.internal.czcx.cc" # Public facing URL of Grafana
       dashboards:
       - name: "Istio Service Dashboard"
         variables:
