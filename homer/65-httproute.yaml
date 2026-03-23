@@ -15,6 +15,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: homer
-          port: 80
-
+        - name: oauth2-proxy
+          port: 4180
