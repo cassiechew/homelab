@@ -29,3 +29,7 @@ spec:
           mountPath: /www/assets/config.yml
           subPath: config.yml
           readOnly: true
+        - name: config
+          mountPath: /www/assets/custom.css
+          subPath: custom.css
+          readOnly: true
