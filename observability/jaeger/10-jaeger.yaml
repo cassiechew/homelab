@@ -28,13 +28,4 @@ spec:
     - name: badger-storage
       emptyDir: {}
   ingress:
-    ingressClassName: nginx
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-prod
-    hosts:
-      - jaeger.internal.czcx.cc
-    tls: 
-      - hosts:
-        - jaeger.internal.czcx.cc
-        secretName: jaeger-tls-prod-cert
+    enabled: false
