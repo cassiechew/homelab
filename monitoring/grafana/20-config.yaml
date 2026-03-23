@@ -33,7 +33,7 @@ data:
     level = debug
     filters = oauth.generic_oauth:debug
     [users]
-    allow_sign_up = true
+    allow_sign_up = false
     auto_assign_org = true
     auto_assign_org_id = 1
     auto_assign_org_role = Admin
