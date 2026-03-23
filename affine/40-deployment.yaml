@@ -73,6 +73,8 @@ spec:
                   key: REDIS_SERVER_PASSWORD
             - name: AFFINE_BASE_URL
               value: "https://affine.internal.czcx.cc"
+            - name: NODE_TLS_REJECT_UNAUTHORIZED
+              value: "0"
           ports:
             - containerPort: 3010
           volumeMounts:
