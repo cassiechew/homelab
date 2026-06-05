@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: searxng-config
+  namespace: searxng
+data:
+  settings.yml: |
+    use_default_settings: true
+
+    general:
+      debug: false
+      instance_name: "searxng"
+      privacypolicy_url: false
+      donation_url: false
+      contact_url: false
+      enable_metrics: false
+
+    search:
+      safe_search: 0
+      autocomplete: ""
+      default_lang: "en"
+      ban_time_on_fail: 5
+      max_ban_time_on_fail: 120
+
+    server:
+      port: 8080
+      bind_address: "0.0.0.0"
+      secret_key: "CHANGE_ME_TO_A_RANDOM_SECRET"
+      limiter: false
+      public_instance: false
+      image_proxy: true
+
+    ui:
+      static_use_hash: true
+      default_locale: "en"
+      query_in_title: true
+      infinite_scroll: false
+      center_alignment: false
+      default_theme: simple
+      theme_args:
+        simple_style: dark
+
+    # Route outbound requests through Tor
+    # Uncomment once Tor is running in the cluster
+    # outgoing:
+    #   proxies:
+    #     all://:
+    #       - socks5://tor-proxy:9050
+
+    engines:
+      - name: brave
+        engine: brave
+        shortcut: br
+        disabled: false
+
+      - name: google
+        engine: google
+        shortcut: g
+        disabled: false
+
+      - name: duckduckgo
+        engine: duckduckgo
+        shortcut: ddg
+        disabled: false
+
+      - name: bing
+        engine: bing
+        shortcut: bi
+        disabled: true  # enable if you want bing results
+
+      - name: wikipedia
+        engine: wikipedia
+        shortcut: wp
+        disabled: false
