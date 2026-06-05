@@ -36,7 +36,11 @@ spec:
             - --redeem-url=http://pocket-id.pocket-id.svc.cluster.local:1411/api/oidc/token
             - --oidc-jwks-url=http://pocket-id.pocket-id.svc.cluster.local:1411/.well-known/jwks.json
             - --profile-url=http://pocket-id.pocket-id.svc.cluster.local:1411/api/oidc/userinfo
-
+            - --custom-templates-dir=/templates
+            - --skip-oidc-discovery=true
+          volumeMounts:
+            - name: templates
+              mountPath: /templates
           env:
             - name: OAUTH2_PROXY_CLIENT_SECRET
               valueFrom:
@@ -50,6 +54,10 @@ spec:
                   key: cookie_secret
           ports:
             - containerPort: 4180
+      volumes:
+        - name: templates
+          configMap:
+            name: oauth2-proxy-templates
 ---
 apiVersion: v1
 kind: Service

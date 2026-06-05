@@ -8,3 +8,4 @@ spec:
   subnetRouter:
     advertiseRoutes:
       - "100.90.119.128/32"
+      - "192.168.68.69/32"
