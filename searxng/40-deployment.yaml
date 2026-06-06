@@ -15,6 +15,7 @@ spec:
       labels:
         app: searxng
     spec:
+      serviceAccountName: searxng
       containers:
         - name: searxng
           image: searxng/searxng:latest
@@ -23,9 +24,14 @@ spec:
           env:
             - name: SEARXNG_SETTINGS_PATH
               value: /etc/searxng/settings.yml
+            - name: SEARXNG_PORT
+              value: "8080"
+            - name: SEARXNG_BIND_ADDRESS
+              value: "0.0.0.0:8080"
           volumeMounts:
             - name: config
               mountPath: /etc/searxng
+              readOnly: false
           resources:
             requests:
               memory: "128Mi"
@@ -45,6 +51,7 @@ spec:
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 10
+
       volumes:
         - name: config
           configMap:

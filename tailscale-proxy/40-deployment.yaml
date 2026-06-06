@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tailscale-proxy
+  namespace: tailscale-proxy
+  labels:
+    app: tailscale-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tailscale-proxy
+  template:
+    metadata:
+      labels:
+        app: tailscale-proxy
+    spec:
+      serviceAccountName: tailscale-proxy
+      containers:
+        - name: tailscale
+          image: tailscale/tailscale:latest
+          env:
+            - name: TS_AUTHKEY
+              valueFrom:
+                secretKeyRef:
+                  name: tailscale-proxy-secret
+                  key: TS_AUTHKEY
+            - name: TS_USERSPACE
+              value: "false"
+            - name: TS_SOCKS5_SERVER
+              value: "0.0.0.0:1055"
+            - name: TS_EXTRA_ARGS
+              value: "--exit-node=100.100.131.35 --exit-node-allow-lan-access --accept-routes"
+            - name: TS_STATE_DIR
+              value: /var/lib/tailscale
+            - name: TS_ACCEPT_DNS
+              value: "false"
+            - name: TS_KUBE_SECRET
+              value: ""
+            - name: TS_HOSTNAME
+              value: mullvad-proxy
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_UID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.uid
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          volumeMounts:
+            - name: tailscale-state
+              mountPath: /var/lib/tailscale
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+          readinessProbe:
+            tcpSocket:
+              port: 1055
+            initialDelaySeconds: 15
+            periodSeconds: 10
+      volumes:
+        - name: tailscale-state
+          emptyDir: {}

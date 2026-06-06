@@ -9,7 +9,7 @@ data:
 
     general:
       debug: false
-      instance_name: "searxng"
+      instance_name: "search"
       privacypolicy_url: false
       donation_url: false
       contact_url: false
@@ -21,11 +21,12 @@ data:
       default_lang: "en"
       ban_time_on_fail: 5
       max_ban_time_on_fail: 120
+      method: POST
 
     server:
       port: 8080
       bind_address: "0.0.0.0"
-      secret_key: "CHANGE_ME_TO_A_RANDOM_SECRET"
+      secret_key: "0fcacc8cecf9a06b8ee6a8499176993d6508ec2515ab61e46a58d6131b695938"
       limiter: false
       public_instance: false
       image_proxy: true
@@ -40,12 +41,11 @@ data:
       theme_args:
         simple_style: dark
 
-    # Route outbound requests through Tor
-    # Uncomment once Tor is running in the cluster
-    # outgoing:
-    #   proxies:
-    #     all://:
-    #       - socks5://tor-proxy:9050
+    outgoing:
+      proxies:
+        all://:
+          - socks5://tailscale-proxy.tailscale-proxy.svc.cluster.local:1055
+
 
     engines:
       - name: brave
@@ -62,11 +62,6 @@ data:
         engine: duckduckgo
         shortcut: ddg
         disabled: false
-
-      - name: bing
-        engine: bing
-        shortcut: bi
-        disabled: true  # enable if you want bing results
 
       - name: wikipedia
         engine: wikipedia
