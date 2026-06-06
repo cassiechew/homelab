@@ -1,0 +1,55 @@
+apiVersion: v1
+data:
+  base.html: "<!DOCTYPE html>\n<html class=\"no-js theme-{{ preferences.get_value('simple_style')\
+    \ or 'auto' }} center-alignment-{{ preferences.get_value('center_alignment') and\
+    \ 'yes' or 'no' }}\" lang=\"{{ locale_rfc5646 }}\" {% if rtl %} dir=\"rtl\"{%\
+    \ endif %}>\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"endpoint\" content=\"\
+    {{ endpoint }}\">\n  <meta name=\"description\" content=\"SearXNG — a privacy-respecting,\
+    \ open metasearch engine\">\n  <meta name=\"keywords\" content=\"SearXNG, search,\
+    \ search engine, metasearch, meta search\">\n  <meta name=\"generator\" content=\"\
+    searxng/{{ searxng_version }}\">\n  <meta name=\"referrer\" content=\"no-referrer\"\
+    >\n  <meta name=\"robots\" content=\"noarchive\">\n  <meta name=\"viewport\" content=\"\
+    width=device-width, initial-scale=1\">\n  <title>{% block title %}{% endblock\
+    \ %}{{ instance_name }}</title>\n  <script type=\"module\" src=\"{{ url_for('static',\
+    \ filename='sxng-core.min.js') }}\" client_settings=\"{{ client_settings }}\"\
+    ></script>\n  {% block meta %}{% endblock %}\n  {% if rtl %}\n  <link rel=\"stylesheet\"\
+    \ href=\"{{ url_for('static', filename='sxng-rtl.min.css') }}\" type=\"text/css\"\
+    \ media=\"screen\">\n  {% else %}\n  <link rel=\"stylesheet\" href=\"{{ url_for('static',\
+    \ filename='sxng-ltr.min.css') }}\" type=\"text/css\" media=\"screen\">\n  {%\
+    \ endif %}\n  {% if get_setting('server.limiter') or get_setting('server.public_instance')\
+    \ %}\n  <link rel=\"stylesheet\" href=\"{{ url_for('client_token', token=link_token)\
+    \ }}\" type=\"text/css\">\n  {% endif %}\n  <link rel=\"stylesheet\" href=\"{{\
+    \ url_for('static', filename='themes/simple/css/custom.css') }}\" type=\"text/css\"\
+    \ media=\"screen\">\n  {% block head %}\n  <link title=\"{{ instance_name }}\"\
+    \ type=\"application/opensearchdescription+xml\" rel=\"search\" href=\"{{ opensearch_url\
+    \ }}\">\n  {% endblock %}\n  <link rel=\"icon\" href=\"{{ url_for('static', filename='img/favicon.png')\
+    \ }}\" sizes=\"any\">\n  <link rel=\"icon\" href=\"{{ url_for('static', filename='img/favicon.svg')\
+    \ }}\" type=\"image/svg+xml\">\n  <link rel=\"apple-touch-icon\" href=\"{{ url_for('static',\
+    \ filename='img/favicon.png') }}\">\n  <link rel=\"manifest\" href=\"{{ url_for('manifest')\
+    \ }}\" />\n</head>\n<body class=\"{{ endpoint }}_endpoint\" >\n  <main id=\"main_{{\
+    \  self._TemplateReference__context.name|replace(\"simple/\", \"\")|replace(\"\
+    .html\", \"\") }}\" class=\"{{body_class}}\">\n    {% if errors %}\n        <div\
+    \ class=\"dialog-error\" role=\"alert\">\n            <a href=\"#\" class=\"close\"\
+    \ aria-label=\"close\" title=\"close\">×</a>\n            <ul>\n            {%\
+    \ for message in errors %}\n                <li>{{ message }}</li>\n         \
+    \   {% endfor %}\n            </ul>\n        </div>\n    {% endif %}\n\n    <nav\
+    \ id=\"links_on_top\">\n      {%- from 'simple/icons.html' import icon_big -%}\n\
+    \      {%- block linkto_about -%}\n        <a href=\"{{ url_for('info', pagename='about')\
+    \ }}\" class=\"link_on_top_about\">{{ icon_big('information-circle') }}<span>{{\
+    \ _('About') }}</span></a>\n      {%- endblock -%}\n      {%- block linkto_donate\
+    \ -%}\n        {%- if donation_url -%}\n        <a href=\"{{ donation_url }}\"\
+    \ class=\"link_on_top_donate\">{{ icon_big('heart') }}<span>{{ _('Donate') }}</span></a>\n\
+    \        {%- endif -%}\n      {%- endblock -%}\n      {%- block linkto_preferences\
+    \ -%}\n        {%- if request.args.get('preferences') -%}\n          <a href=\"\
+    {{ url_for('preferences') }}?preferences={{ request.args.get('preferences') }}&preferences_preview_only=true\"\
+    \ class=\"link_on_top_preferences\">{{ icon_big('settings') }}<span>{{ _('Preferences')\
+    \ }}</span></a>\n        {%- else -%}\n          <a href=\"{{ url_for('preferences')\
+    \ }}\" class=\"link_on_top_preferences\">{{ icon_big('settings') }}<span>{{ _('Preferences')\
+    \ }}</span></a>\n        {%- endif -%}\n      {%- endblock -%}\n    </nav>\n \
+    \   {% block header %}\n    {% endblock %}\n    {% block content %}\n    {% endblock\
+    \ %}\n  </main>\n  <footer>\n    <p>{{ _('Powered by') }} <a href=\"{{ url_for('info',\
+    \ pagename='about') }}\">SearXNG</a></p>\n  </footer>\n</body>\n</html>\n"
+kind: ConfigMap
+metadata:
+  name: searxng-base-template
+  namespace: searxng

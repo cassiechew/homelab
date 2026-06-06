@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: searxng-custom-css
+  namespace: searxng
+data:
+  custom.css: |
+    .title {
+      display: none !important;
+    }
+
+    html.theme-light {
+      --color-base-background: #fff5f8;
+      --color-base-font: #1a0010;
+      --color-header-background: #fff0f4;
+      --color-header-border: #ffb3cc;
+      --color-footer-background: #fff0f4;
+      --color-footer-border: #ffb3cc;
+      --color-result-title-font: #cc0052;
+      --color-result-url-font: #9333ea;
+      --color-result-url-visited-font: #7e22ce;
+      --color-btn-background: #cc0052;
+      --color-btn-font: #ffffff;
+      --color-categories-item-selected: #ffe4ef;
+      --color-categories-item-border-selected: #cc0052;
+      --color-categories-item-selected-font: #cc0052;
+      --color-autocomplete-background: #fff0f4;
+      --color-autocomplete-border: #ffb3cc;
+    }
+
+    html.theme-dark {
+      --color-base-background: #120a0f;
+      --color-base-font: #f0d0e0;
+      --color-header-background: #1a0a12;
+      --color-header-border: #44152a;
+      --color-footer-background: #1a0a12;
+      --color-footer-border: #44152a;
+      --color-result-title-font: #ff3d8a;
+      --color-result-url-font: #c084fc;
+      --color-result-url-visited-font: #a855f7;
+      --color-btn-background: #ff3d8a;
+      --color-btn-font: #ffffff;
+      --color-categories-item-selected: #2a0f1f;
+      --color-categories-item-border-selected: #ff3d8a;
+      --color-categories-item-selected-font: #ff3d8a;
+      --color-autocomplete-background: #1e0f18;
+      --color-autocomplete-border: #44152a;
+      --color-result-background: #1a0a12;
+      --color-result-border: #2a0f1f;
+    }
+
+    .instance-name,
+    #main-logo {
+      display: none !important;
+    }

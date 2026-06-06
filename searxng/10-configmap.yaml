@@ -18,6 +18,7 @@ data:
     search:
       safe_search: 0
       autocomplete: ""
+      favicon_resolver: "allesedv"
       default_lang: "en"
       ban_time_on_fail: 5
       max_ban_time_on_fail: 120
@@ -26,20 +27,22 @@ data:
     server:
       port: 8080
       bind_address: "0.0.0.0"
-      secret_key: "0fcacc8cecf9a06b8ee6a8499176993d6508ec2515ab61e46a58d6131b695938"
+      secret_key: "placeholder-not-used"
       limiter: false
       public_instance: false
       image_proxy: true
 
     ui:
-      static_use_hash: true
+      static_use_hash: false
       default_locale: "en"
       query_in_title: true
       infinite_scroll: false
       center_alignment: false
       default_theme: simple
       theme_args:
-        simple_style: dark
+        simple_style: light
+      static_files:
+        - "themes/simple/css/custom.css"
 
     outgoing:
       proxies:
