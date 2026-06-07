@@ -61,3 +61,5 @@ for ns in whoami homer monitoring observability monica affine pocket-id searxng;
 done
 echo "✅ Waypoints applied."
 
+echo "📡 Applying telemetry config..."
+kubectl apply -f /home/cassiechew3/config/homelab/istio/55-telemetry.yaml --kubeconfig "$KUBECONFIG"
