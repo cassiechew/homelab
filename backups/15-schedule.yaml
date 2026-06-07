@@ -1,0 +1,17 @@
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: daily-backup
+  namespace: velero
+spec:
+  schedule: "0 3 * * *"
+  template:
+    ttl: 720h
+    defaultVolumesToFsBackup: true
+    includedNamespaces:
+      - pocket-id
+      - monica
+      - affine
+      - grafana
+      - lesma
+      - postgres
