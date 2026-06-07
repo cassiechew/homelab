@@ -12,35 +12,21 @@ data:
       - job_name: "node-exporter"
         static_configs:
           - targets:
-            - 'node-exporter.monitoring.svc.cluster.local:9100'
+            - 'node-exporter.node-exporter.svc.cluster.local:9100'
+
       - job_name: "kubernetes-nodes"
         kubernetes_sd_configs:
           - role: node
+
       - job_name: "kubernetes-pods"
         kubernetes_sd_configs:
           - role: pod
+
       - job_name: "kubernetes-service-endpoints"
         kubernetes_sd_configs:
           - role: endpoints
-      - job_name: 'kube-state-metrics'
+
+      - job_name: "kube-state-metrics"
         static_configs:
           - targets:
-            - 'kube-state-metrics.kube-system.svc.cluster.local:8080'  # Adjust with correct address
-        kubernetes_sd_configs:
-          - role: pod
-            namespaces:
-              names:
-                - kube-system
-        metrics_path: /metrics
-        scheme: http
-        relabel_configs:
-          - source_labels: [__meta_kubernetes_service_name]
-            target_label: service
-          - source_labels: [__meta_kubernetes_namespace]
-            target_label: namespace
-          - source_labels: [__meta_kubernetes_pod_name]
-            target_label: pod
-          - source_labels: [__meta_kubernetes_pod_container_name]
-            target_label: container
-          - source_labels: [__meta_kubernetes_pod_label_k8s_app]
-            target_label: app
+            - 'kube-state-metrics.kube-system.svc.cluster.local:8080'

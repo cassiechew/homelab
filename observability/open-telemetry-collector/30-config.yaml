@@ -12,11 +12,11 @@ data:
           http: {}
     exporters:
       otlp:
-        endpoint: jaeger-collector.observability.svc.cluster.local:4317
+        endpoint: tempo.observability.svc.cluster.local:4317
         tls:
           insecure: true
       logging:
-        loglevel: debug
+        loglevel: warn
     service:
       pipelines:
         traces:
