@@ -11,11 +11,12 @@ BUCKET="velero-backups"
 echo "🔍 Using kubeconfig at $KUBECONFIG"
 
 # ── 1. Install Velero CLI ──────────────────────────────────────────────────
+WORK_DIR=$(mktemp -d -p "$HOME")
 echo "📦 Installing Velero CLI $VELERO_VERSION..."
-curl -L https://github.com/vmware-tanzu/velero/releases/download/$VELERO_VERSION/velero-$VELERO_VERSION-linux-amd64.tar.gz -o /tmp/velero.tar.gz
-tar -xzf /tmp/velero.tar.gz -C /tmp
-sudo mv /tmp/velero-$VELERO_VERSION-linux-amd64/velero /usr/local/bin/velero
-rm /tmp/velero.tar.gz
+curl -L https://github.com/vmware-tanzu/velero/releases/download/$VELERO_VERSION/velero-$VELERO_VERSION-linux-amd64.tar.gz -o "$WORK_DIR/velero.tar.gz"
+tar -xzf "$WORK_DIR/velero.tar.gz" -C "$WORK_DIR"
+sudo mv "$WORK_DIR/velero-$VELERO_VERSION-linux-amd64/velero" /usr/local/bin/velero
+rm -rf "$WORK_DIR"
 echo "✅ Velero CLI installed: $(velero version --client-only)"
 
 # ── 2. Create credentials file ────────────────────────────────────────────
@@ -26,7 +27,8 @@ if [ -z "$GARAGE_ACCESS_KEY" ] || [ -z "$GARAGE_SECRET_KEY" ]; then
   exit 1
 fi
 
-cat > /tmp/credentials-velero << CREDS
+CREDS_FILE=$(mktemp -p "$HOME")
+cat > "$CREDS_FILE" << CREDS
 [default]
 aws_access_key_id=$GARAGE_ACCESS_KEY
 aws_secret_access_key=$GARAGE_SECRET_KEY
@@ -38,13 +40,13 @@ velero install \
   --provider aws \
   --plugins velero/velero-plugin-for-aws:v1.11.0 \
   --bucket $BUCKET \
-  --secret-file /tmp/credentials-velero \
+  --secret-file "$CREDS_FILE" \
   --use-node-agent \
   --default-volumes-to-fs-backup \
   --backup-location-config region=garage,s3ForcePathStyle=true,s3Url=http://$GARAGE_IP:$GARAGE_PORT \
   --kubeconfig "$KUBECONFIG"
 
-rm /tmp/credentials-velero
+rm -f "$CREDS_FILE"
 echo "✅ Credentials file cleaned up"
 
 # ── 4. Wait for Velero to be ready ───────────────────────────────────────
@@ -56,13 +58,9 @@ kubectl rollout status daemonset node-agent -n velero --kubeconfig "$KUBECONFIG"
 echo "🔍 Verifying backup location..."
 velero backup-location get --kubeconfig "$KUBECONFIG"
 
-# ── 6. Create backup schedule ────────────────────────────────────────────
-echo "📅 Creating backup schedule..."
-velero schedule create daily-backup \
-  --schedule="0 3 * * *" \
-  --ttl 720h \
-  --default-volumes-to-fs-backup \
-  --kubeconfig "$KUBECONFIG"
+# ── 6. Apply backup schedule ─────────────────────────────────────────────
+echo "📅 Applying backup schedule..."
+kubectl apply -f "$(dirname "$0")/../15-schedule.yaml" --kubeconfig "$KUBECONFIG"
 
 echo ""
 echo "✅ Velero installed and configured!"
