@@ -88,6 +88,10 @@ data:
           - name: "NextDNS"
             url: "https://my.nextdns.io"
             icon: "fas fa-book"
+          - name: "SearXNG"
+            url: "https://search.internal.czcx.cc"
+            icon: "fas fa-search"
+            tag: "search"
           - name: "whoami"
             url: "https://who.czcx.cc"
             tag: "ID"
@@ -107,10 +111,6 @@ data:
             url: "https://kiali.internal.czcx.cc"
             icon: "fa fa-sailboat"
             tag: "istio"
-          - name: "Jaeger"
-            url: "https://jaeger.internal.czcx.cc"
-            icon: "fa fa-bullseye"
-            tag: "metrics"
   custom.css: |
     :root {
       /* Core */
