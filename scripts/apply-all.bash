@@ -33,7 +33,7 @@ echo ""
 echo "🏷️  Phase 2: Namespaces"
 for ns in tailscale tailscale-proxy whoami lesma homer affine monica jellyfin \
           nas pocket-id monitoring observability postgres redis cloudflared \
-          kube-metrics node-exporter searxng backups; do
+          kube-metrics node-exporter searxng; do
   if [ -f "$HOMELAB_DIR/$ns/00-namespace.yaml" ]; then
     echo "  ✨ namespace: $ns"
     kubectl apply -f "$HOMELAB_DIR/$ns/00-namespace.yaml" --kubeconfig "$KUBECONFIG" || true
@@ -54,8 +54,8 @@ apply_dir "istio"
 # ── 5. SEALED SECRETS ─────────────────────────────────────────────────────
 echo ""
 echo "🔒 Phase 5: Sealed Secrets"
-for dir in tailscale-proxy pocket-id monica affine homer monitoring observability \
-           postgres redis kiali searxng backups cloudflared; do
+for dir in tailscale-proxy pocket-id homer observability \
+           postgres kiali searxng cloudflared; do
   secret="$HOMELAB_DIR/$dir/14-sealed-secret.yaml"
   if [ -f "$secret" ]; then
     echo "  ✨ secret: $dir"
