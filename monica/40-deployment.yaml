@@ -20,16 +20,32 @@ spec:
             - name: http
               containerPort: 80
           env:
-            - {name: DB_CONNECTION, value: "mysql"}
-            - {name: DB_HOST, value: "mariadb-svc"}
-            - {name: DB_PORT, value: "3306"}
-            - {name: APP_ENV, value: "production"}
-            - {name: APP_URL, value: "https://monica.internal.czcx.cc"}
-            - {name: QUEUE_CONNECTION, value: "database"}
-            - {name: SESSION_DRIVER, value: "file"}
+            - name: DB_CONNECTION
+              value: "mysql"
+            - name: DB_HOST
+              value: "mariadb-svc"
+            - name: DB_PORT
+              value: "3306"
+            - name: APP_ENV
+              value: "production"
+            - name: APP_URL
+              value: "https://monica.internal.czcx.cc"
+            - name: QUEUE_CONNECTION
+              value: "database"
+            - name: SESSION_DRIVER
+              value: "file"
           envFrom:
-            - secretRef: {name: monica-app}
-            - secretRef: {name: monica-db}
+            - secretRef: 
+                name: monica-app
+            - secretRef: 
+                name: monica-db
+          resources:
+            requests:
+              memory: 128Mi
+              cpu: 50m
+            limits:
+              memory: 512Mi
+              cpu: 300m
           volumeMounts:
             - name: storage
               mountPath: /var/www/html/storage

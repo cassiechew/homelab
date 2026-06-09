@@ -26,3 +26,27 @@ spec:
         ports:
         - containerPort: 80
           protocol: TCP
+        resources:
+          requests:
+            memory: 16Mi
+            cpu: 10m
+          limits:
+            memory: 32Mi
+            cpu: 50m
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 2
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 20
+          timeoutSeconds: 2
+          failureThreshold: 3
+
