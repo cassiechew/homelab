@@ -1,0 +1,16 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: homer-access-policy
+  namespace: homer
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: Gateway
+    name: waypoint
+  action: ALLOW
+  rules:
+    - from:
+      - source:
+          namespaces: ["istio-system", "homer"]
+

@@ -19,7 +19,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: scheduler
-              image: monicahq/monica:latest
+              image: monica:latest
               command: ["cron.sh"]
               env:
                 - {name: DB_CONNECTION, value: "mysql"}

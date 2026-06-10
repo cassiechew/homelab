@@ -4,6 +4,8 @@ metadata:
   name: monica
   namespace: monica
 spec:
+  strategy:
+    type: Recreate
   replicas: 1
   selector:
     matchLabels: {app: monica}
@@ -49,20 +51,26 @@ spec:
           volumeMounts:
             - name: storage
               mountPath: /var/www/html/storage
+          startupProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 12  # 2 minutes to start
           readinessProbe:
             httpGet:
               path: /
               port: 80
-              scheme: HTTP
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            timeoutSeconds: 2
-            failureThreshold: 6
-          livenessProbe:
-            tcpSocket:
-              port: 80
-            initialDelaySeconds: 60
             periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 20
+            timeoutSeconds: 5
             failureThreshold: 3
       volumes:
         - name: storage

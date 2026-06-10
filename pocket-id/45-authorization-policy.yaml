@@ -1,0 +1,15 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: pocket-id-access-policy
+  namespace: pocket-id
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: Gateway
+    name: waypoint
+  action: ALLOW
+  rules:
+    - from:
+      - source:
+          namespaces: ["istio-system", "monitoring", "observability", "homer", "affine", "pocket-id"]

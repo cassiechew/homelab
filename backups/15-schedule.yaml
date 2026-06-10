@@ -12,6 +12,6 @@ spec:
       - pocket-id
       - monica
       - affine
-      - grafana
+      - monitoring
       - lesma
       - postgres
