@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: oauth2-proxy-templates
+  namespace: monitoring
+data:
+  sign_in.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Sign in</title>
+      <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { min-height: 100vh; background: #161616; display: flex; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, sans-serif; padding: 2rem; }
+        .card { background: #1e1e1e; border: 1px solid #333; border-radius: 16px; padding: 2.5rem 2rem; width: 100%; max-width: 380px; text-align: center; }
+        .sigil { width: 56px; height: 56px; margin: 0 auto 1.25rem; border: 1.5px solid #FF0066; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .title { font-size: 20px; font-weight: 500; color: #FFFFFF; margin: 0 0 0.25rem; }
+        .subtitle { font-size: 13px; color: #F77AB0; margin: 0 0 2rem; letter-spacing: 0.08em; }
+        .service { font-size: 13px; color: #aaa; margin: 0 0 1.5rem; padding: 0.5rem 1rem; background: #111; border-radius: 8px; border: 1px solid #333; }
+        .footer { font-size: 12px; color: #666; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #333; }
+      </style>
+    </head>
+    <body>
+      <div class="card">
+        <div class="sigil">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FF0066" stroke-width="1.5" width="28" height="28">
+            <path d="M12 2L8 8H2l5 4-2 7 7-4 7 4-2-7 5-4h-6L12 2z"/>
+          </svg>
+        </div>
+        <p class="title">Sign in to continue</p>
+        <p class="subtitle">✦ protected by pocket id ✦</p>
+        <div class="service">{{.ProxyPrefix}}</div>
+        <a href="/oauth2/start?rd={{.Redirect}}" style="display:block;width:100%;padding:0.75rem;background-color:#FF0066 !important;color:#ffffff !important;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;letter-spacing:0.02em;text-decoration:none;">Continue with Pocket ID</a>
+        <div class="footer">cassie's coven — access by invitation only</div>
+      </div>
+    </body>
+    </html>
