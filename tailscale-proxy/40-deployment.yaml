@@ -68,4 +68,5 @@ spec:
             periodSeconds: 10
       volumes:
         - name: tailscale-state
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: tailscale-proxy-state
