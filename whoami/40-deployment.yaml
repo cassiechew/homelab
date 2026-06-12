@@ -19,6 +19,10 @@ spec:
         app: whoami
     spec:
       restartPolicy: Always
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       containers:
       - image: containous/whoami
         imagePullPolicy: Always
@@ -26,6 +30,11 @@ spec:
         ports:
         - containerPort: 80
           protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+          readOnlyRootFilesystem: true
         resources:
           requests:
             memory: 16Mi

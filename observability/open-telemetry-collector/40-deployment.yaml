@@ -13,9 +13,18 @@ spec:
       labels:
         app: otel-collector
     spec:
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: otel-collector
           image: otel/opentelemetry-collector-contrib:0.99.0
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            readOnlyRootFilesystem: true
           args: ["--config=/conf/collector.yaml"]
           ports:
             - containerPort: 4317
