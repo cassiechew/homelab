@@ -14,9 +14,21 @@ spec:
       labels:
         app: redis
     spec:
+      securityContext:
+        runAsUser: 999
+        runAsGroup: 999
+        fsGroup: 999
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: redis
           image: redis:7-alpine
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            readOnlyRootFilesystem: true
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 6379

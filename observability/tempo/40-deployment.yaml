@@ -17,9 +17,17 @@ spec:
         fsGroup: 10001
         runAsUser: 10001
         runAsGroup: 10001
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: tempo
           image: grafana/tempo:2.4.0
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            readOnlyRootFilesystem: true
           args:
             - -config.file=/etc/tempo/tempo.yaml
           ports:

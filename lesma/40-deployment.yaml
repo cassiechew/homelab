@@ -19,13 +19,18 @@ spec:
         runAsUser: 100
         runAsGroup: 100
         fsGroup: 100
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: app
-          # Choose an available image:
-          # - Build from source and push to your registry
-          # - Or use registry.gitlab.com/ogarcia/lesma:<tag> if published
           image: registry.gitlab.com/ogarcia/lesma:latest
           imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            readOnlyRootFilesystem: true
           ports:
             - containerPort: 8000
               name: http
