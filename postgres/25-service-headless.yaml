@@ -11,5 +11,6 @@ spec:
     - name: pg
       port: 5432
       targetPort: 5432
+      appProtocol: tcp
   selector:
     app: postgres
