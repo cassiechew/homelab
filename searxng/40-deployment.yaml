@@ -31,7 +31,7 @@ spec:
             - name: SEARXNG_SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                  name: searxng-tailscale
+                  name: searxng-secret
                   key: SEARXNG_SECRET_KEY
           volumeMounts:
             - name: config

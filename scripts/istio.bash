@@ -50,13 +50,13 @@ kubectl apply -f /home/cassiechew3/config/homelab/gateway/60-gateway.yaml --kube
 echo "✅ Gateway resources applied."
 
 echo "🏷️ Re-labelling namespaces for ambient mode..."
-for ns in whoami lesma observability monitoring monica homer nas jellyfin pocket-id affine postgres searxng; do
+for ns in whoami lesma observability monitoring monica homer pocket-id affine; do
   kubectl label namespace $ns istio.io/dataplane-mode=ambient --overwrite --kubeconfig "$KUBECONFIG"
 done
 echo "✅ Namespaces labelled."
 
 echo "🔮 Applying waypoints..."
-for ns in whoami homer monitoring observability monica affine pocket-id searxng postgres; do
+for ns in whoami homer monitoring observability monica affine pocket-id searxng; do
   istioctl waypoint apply -n $ns --enroll-namespace --kubeconfig "$KUBECONFIG" --overwrite
 done
 echo "✅ Waypoints applied."
